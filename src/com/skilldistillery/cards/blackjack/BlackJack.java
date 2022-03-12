@@ -12,6 +12,8 @@ public class BlackJack {
 	List<Card> dealerHand = new ArrayList<>();
 	int userHandValue = 0;
 	int dealerHandValue = 0;
+	
+	int newDealerHandValue = 0;
 
 	public void shuffleDeck() {
 		d.shuffle();
@@ -38,7 +40,6 @@ public class BlackJack {
 	}
 
 	public void checkForTwentyOne() {
-
 		while (true) {
 			if (dealerHandValue == 21 && userHandValue == 21) {
 				System.out.println("Both the dealer and user were dealt a BlackJack");
@@ -69,36 +70,43 @@ public class BlackJack {
 		for (Card cardAdded : userHand) {
 			newUserHandValue += cardAdded.getValue();
 		}
-		System.out.println("Your hand is now" + userHand + " " + newUserHandValue);
+		userHandValue = newUserHandValue;
+		System.out.println("Your hand is now" + userHand + " " + userHandValue);
 	}
 
 	public void checkForBust() {
-		while (userHandValue < 21) {
 			if (userHandValue > 21) {
 				System.out.println("User hand is over 21");
 				System.out.println("Bust");
-				break;
-			} else {
-				break;
-			}
-
+		}
+	}
+	public void checkForDealerBust() {
+		if (dealerHandValue > 21) {
+			System.out.println("Dealer hand is over 21");
+			System.out.println("Bust");
 		}
 	}
 
 	public void dealerBible() {
-		System.out.println(dealerHand + " " + dealerHandValue);
+		System.out.println("The dealer hand is" + dealerHand + " " + dealerHandValue);
 		boolean keepDrawing = true;
 		while (keepDrawing) {
-			if (dealerHandValue >= 17) {
+			if(dealerHandValue > userHandValue) {
 				keepDrawing = false;
-			} else if (dealerHandValue < 17) {
-				int newDealerHandValue = 0;
+			}
+		else if (dealerHandValue >= 17) {
+				keepDrawing = false;
+		
+		}
+			if (dealerHandValue < 17) {
+				newDealerHandValue = 0;
 				dealerHand.add(d.dealCard());
+				
 				for (Card cardAdded : dealerHand) {
 					newDealerHandValue += cardAdded.getValue();
 				}
-				
-				System.out.println("The dealer's hand is now " + dealerHand + " " + newDealerHandValue);
+				dealerHandValue = newDealerHandValue;
+				System.out.println("The dealer's hand is now " + dealerHand + " " + dealerHandValue);
 				break;
 			}
 		}
@@ -112,18 +120,23 @@ public class BlackJack {
 	}
 
 	public void checkWinner() {
-		
-		if (dealerHandValue > userHandValue) {
-			System.out.println("Dealer Wins");
-			clear();
+		if(dealerHandValue == userHandValue) {
+			System.out.println("Push");
 		}
-		if (userHandValue > dealerHandValue) {
+		else if (newDealerHandValue > userHandValue) {
+			System.out.println("Dealer Wins");
+		}
+		else if (userHandValue > newDealerHandValue) {
 			System.out.println("User Wins");
-			clear();
+		
 		}
 	}
 	public void clear() {
 		userHand.clear();
+		int clearedUserHandValue = 0;
+		userHandValue = clearedUserHandValue;
 		dealerHand.clear();
+		int clearedDealerHandValue = 0;
+		dealerHandValue = clearedDealerHandValue;
 	}
 }
