@@ -9,7 +9,6 @@ public class BlackJackHand extends Hand {
 	
 	@Override
 	public void addCard(Card card) {
-		
 		super.addCard(card);
 	}
 	
@@ -17,15 +16,33 @@ public class BlackJackHand extends Hand {
 	
 	@Override
 	public int getHandValue() {
-		return 0;
+		int handValue = 0;
+		for (Card card : cards) {
+			handValue += card.getValue();
+			
+		}
+		return handValue;
 	}
 	
 	public boolean isBlackjack() {
-		return true;
+		boolean isBlackjack = false;
+		if(getHandValue() == 21) {
+			isBlackjack = true;
+		} else if(getHandValue() != 21) {
+			isBlackjack = false;
+		}
+		return isBlackjack;
 		
 	}
 	public boolean isBust() {
-		return true;
+		boolean isBust = false;
+		if(getHandValue() > 21) {
+			isBust = true;
+		} else if (getHandValue() < 21) {
+			isBust = false;
+		}
+		
+		return isBust;
 	}
 
 }

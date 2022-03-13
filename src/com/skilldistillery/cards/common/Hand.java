@@ -23,7 +23,7 @@ public abstract class Hand {
 		}
 		
 		public void clear() {
-			clear();
+			cards.clear();
 		}
 		public abstract int getHandValue();
 }
