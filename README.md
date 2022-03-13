@@ -14,8 +14,9 @@ Once again this project tied in multiple technologies that were taught throughou
 - Interfaces
 - Encapsulation
 - Implementations of different Classes
+- Try/Catch exceptions too catch user mismatch input
 ### Lessons Learned
 - This was a fun project that I had thought about doing long before I realized it was going to be a homework assignment.
 One of the biggest problems I had was with the initial set up of the project. When we began the project set up as a class, my router went out on me and it took a few minutes for my router to restart. So the following day I was about to finish up the project and submit it. However I had a few bugs that I couldn't figure out so I asked for help during the T.A. hours. It was SD Will who saved me from failing the project because I wasn't implementing any encapsulation in my classes.  
 
-- Another problem I had with my code, was understanding how to get my program to continue to run with nested for loops, and issues with while loops continuing when they should have stopped the program, and the program not continuing with the next method when it needed too. To better understand how these loops were executing, I would stop and read my loops out loud in English and refactor my code from there. 
+- Another problem I had with my code, was understanding how to get my program to continue to run with nested for loops, and issues with while loops continuing when they should have stopped the program, and the program not continuing with the next method when it needed too. To better understand how these loops were executing, I would stop and read my loops out loud in English and refactor my code from there.
