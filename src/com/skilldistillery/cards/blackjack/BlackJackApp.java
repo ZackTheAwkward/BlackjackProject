@@ -27,6 +27,7 @@ public class BlackJackApp {
 				System.out.println("1. Deal me in!");
 				System.out.println("2. No count me out");
 				int userInput = sc.nextInt();
+				sc.nextLine();
 
 				if (userInput == 1) {
 					System.out.println("Alrighty let's deal out this hand");
@@ -43,6 +44,9 @@ public class BlackJackApp {
 					System.out.println("Okay we'll see you next time then!");
 					keepPlaying = false;
 					break;
+				} else if (userInput != 1 && userInput != 2) {
+					System.out.println("Invalid Response, please try again");
+					continue;
 				}
 
 				System.out.println("Okay lets check for BlackJacks");
@@ -66,6 +70,7 @@ public class BlackJackApp {
 				boolean hitAgain = true;
 				while (hitAgain) {
 					int hitOpt = sc.nextInt();
+					sc.nextLine();
 
 					if (hitOpt == 1) {
 
@@ -86,58 +91,60 @@ public class BlackJackApp {
 
 					} else if (hitOpt == 2) {
 						hitAgain = false;
+					} else if (hitOpt != 1 && hitOpt != 2) {
+						System.out.println("Invalid Response, Please try again");
+						continue;
 					}
 
-				}
+					if (bj.isBust() == true) {
+						System.out.println("You Busted, Dealer wins");
+						break;
+					}
 
-				if (bj.isBust() == true) {
-					System.out.println("You Busted, Dealer wins");
-					break;
-				}
+					System.out.println("The dealer reveals his hand");
+					System.out.println(dh.toString() + dh.getHandValue());
+					boolean dealerBible = true;
+					while (dealerBible) {
 
-				System.out.println("The dealer reveals his hand");
-				System.out.println(dh.toString() + dh.getHandValue());
-				boolean dealerBible = true;
-				while (dealerBible) {
-
-					if (dh.getHandValue() >= 17) {
-						dealerBible = false;
-						continue;
-					} else if (dh.getHandValue() > bj.getHandValue()) {
-						dealerBible = false;
-						continue;
-					} else if (dh.getHandValue() < 17) {
-						dh.addCard(d.dealCard());
-						System.out
-								.println("The dealer hits, his hand is now " + dh.toString() + " " + dh.getHandValue());
-						dealerBible = true;
-
-						if (dh.isBust() == true) {
-							System.out.println("WOOHOO Dealer Busted");
-							System.out.println("You win");
-							break;
-						} else if (dh.isBust() != true) {
+						if (dh.getHandValue() >= 17) {
+							dealerBible = false;
 							continue;
+						} else if (dh.getHandValue() > bj.getHandValue()) {
+							dealerBible = false;
+							continue;
+						} else if (dh.getHandValue() < 17) {
+							dh.addCard(d.dealCard());
+							System.out.println(
+									"The dealer hits, his hand is now " + dh.toString() + " " + dh.getHandValue());
+							dealerBible = true;
+
+							if (dh.isBust() == true) {
+								System.out.println("WOOHOO Dealer Busted");
+								System.out.println("You win");
+								break;
+							} else if (dh.isBust() != true) {
+								continue;
+							}
 						}
 					}
-				}
 
-				while (dh.isBust() != true && bj.isBust() != true) {
-					if (dh.getHandValue() == bj.getHandValue()) {
-						System.out.println("Push");
-						break;
-					} else if (dh.getHandValue() > bj.getHandValue()) {
-						System.out.println("Dealer Wins");
-						break;
-					} else if (bj.getHandValue() > dh.getHandValue()) {
-						System.out.println("You win!!");
-						break;
+					while (dh.isBust() != true && bj.isBust() != true) {
+						if (dh.getHandValue() == bj.getHandValue()) {
+							System.out.println("Push");
+							break;
+						} else if (dh.getHandValue() > bj.getHandValue()) {
+							System.out.println("Dealer Wins");
+							break;
+						} else if (bj.getHandValue() > dh.getHandValue()) {
+							System.out.println("You win!!");
+							break;
+						}
+
 					}
+					dh.clear();
+					bj.clear();
 
 				}
-				dh.clear();
-				bj.clear();
-
 			}
 		} catch (Exception e) {
 			System.err.println(e);
